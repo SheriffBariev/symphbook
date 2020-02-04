@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SymphBook Books{%  endblock %}
+
+{% block body %}
+    {% if books %}
+        <table id="books" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Book Title</th>
+                    <th>Year</th>
+                    <th>Author</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                <tr>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.year|date("d-m-Y") }}</td>
+                    <td>{{ book.author}}</td>
+                    <td>
+                        <a href="/book/edit/{{ book.id }}" class="btn btn-dark">Edit</a>
+                        <a href="#" class="btn btn-danger delete-book" data-id="{{ book.id }}">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No books to display</p>
+    {% endif %}
+{#<h1>My name is {{ name }}</h1>#}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/js/main.js"></script>
+{% endblock %}
